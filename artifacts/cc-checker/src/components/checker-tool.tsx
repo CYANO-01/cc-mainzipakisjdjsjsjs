@@ -353,7 +353,7 @@ export function CheckerTool() {
           </div>
 
           {/* Split panels */}
-          <div className="grid grid-cols-2 gap-4 flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
             {/* LIVE panel */}
             <div className="rounded-xl border border-live/20 bg-live/5 overflow-hidden flex flex-col min-h-[380px]">
               <div className="px-4 py-2.5 border-b border-live/20 bg-live/10 flex items-center justify-between">
@@ -415,46 +415,30 @@ function StatCard({ value, label, colorClass }: { value: number; label: string; 
 }
 
 function ResultRow({ result: res, compact }: { result: CheckResult; compact?: boolean }) {
-  const bank    = res.detail?.bankName;
-  const country = res.detail?.country;
-  const conf    = res.confidence;
+  const bank = res.detail?.bankName;
+  const conf = res.confidence;
+
+  // Inline failure tag
+  const failTag = res.status === 'DIE' && res.detail
+    ? (!res.detail.luhn ? 'luhn_fail' : !res.detail.expiryValid ? 'expired' : !res.detail.lengthValid ? 'bad_length' : res.detail.binExists === false ? 'bin_not_found' : res.detail.isTestCard ? 'test_card' : '')
+    : '';
+
+  const cardStr = res.number === 'INVALID FORMAT'
+    ? res.original
+    : `${res.number}|${res.month}|${res.year}|${res.cvv}`;
 
   return (
     <div
       data-testid={`result-row-${res.timestamp}`}
-      className="px-3 py-2 flex items-start gap-2 text-xs font-mono hover:bg-accent/20 transition-colors animate-in fade-in slide-in-from-top-1"
+      className="px-3 py-1.5 flex items-center gap-2 text-xs font-mono hover:bg-accent/20 transition-colors animate-in fade-in slide-in-from-top-1"
     >
-      {/* Card info */}
-      <div className="flex-1 min-w-0 space-y-0.5">
-        <div className={`truncate ${res.status === 'DIE' ? 'text-muted-foreground/60' : 'text-foreground'}`}>
-          {res.number === 'INVALID FORMAT'
-            ? <span className="text-unknown/70">{res.original}</span>
-            : `${maskCardNumber(res.number)}|${res.month}|${res.year}|${res.cvv}`}
-        </div>
-
-        {/* Bank / Country info from BIN */}
-        {(bank || country) && (
-          <div className="text-xs text-muted-foreground/50 flex items-center gap-1">
-            {bank && <span>{bank}</span>}
-            {bank && country && <span>·</span>}
-            {country && <span>{country}</span>}
-            {res.detail?.cardType && (
-              <span className="ml-1 bg-muted px-1 rounded capitalize">{res.detail.cardType}</span>
-            )}
-          </div>
-        )}
-
-        {/* Failure reasons (compact: only show in DIE panel) */}
-        {res.status === 'DIE' && res.detail && (
-          <div className="text-xs text-die/50 flex flex-wrap gap-1">
-            {!res.detail.luhn         && <span>luhn_fail</span>}
-            {!res.detail.expiryValid  && <span>expired</span>}
-            {!res.detail.lengthValid  && <span>bad_length</span>}
-            {res.detail.isTestCard    && <span>test_card</span>}
-            {!res.detail.patternClean && <span>fake_pattern</span>}
-            {res.detail.binExists === false && <span>bin_not_found</span>}
-          </div>
-        )}
+      {/* Card number + inline meta */}
+      <div className="flex-1 min-w-0 flex items-center gap-2 overflow-hidden">
+        <span className={`shrink-0 ${res.status === 'DIE' ? 'text-muted-foreground/50' : 'text-foreground'}`}>
+          {cardStr}
+        </span>
+        {bank && <span className="text-muted-foreground/40 truncate shrink">{bank}</span>}
+        {failTag && <span className="text-die/50 shrink-0">{failTag}</span>}
       </div>
 
       {/* Right side: network + confidence */}
