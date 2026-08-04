@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     q: "How do I use this live CC checker?",
-    a: "Paste your list of credit cards into the input box on the homepage — one card per line in a supported format like 'Number|Month|Year|CVV'. Click START and the bulk cc checker will instantly validate each line and show LIVE, DIE, or UNKN status with details."
+    a: "Paste your list of credit cards into the input box on the homepage one card per line in a supported format like 'Number|Month|Year|CVV'. Click START and the bulk cc checker will instantly validate each line and show LIVE, DIE, or UNKN status with details."
   },
   {
     q: "What does Live / Die / Unknown mean?",
@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Can this check credit card with balance?",
-    a: "Our credit card checker with balance capability covers the structural prerequisites: valid Luhn number, valid BIN from a real issuer, and non-expired date. Actual account balance can only be checked by logging into your bank or issuer portal — no third-party tool can access live balance data without making unauthorized transactions."
+    a: "Our credit card checker with balance capability covers the structural prerequisites: valid Luhn number, valid BIN from a real issuer, and non-expired date. Actual account balance can only be checked by logging into your bank or issuer portal no third-party tool can access live balance data without making unauthorized transactions."
   },
   {
     q: "What is a credit card validator with CVV?",
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "What is a BIN checker CC?",
-    a: "A BIN checker CC (Bank Identification Number checker) reads the first 6–8 digits of a card number to identify the issuing bank, country of issue, card type (debit/credit/prepaid), and network. Our tool performs this lookup automatically using the public binlist.net API — only the BIN prefix is ever transmitted, never the full card number."
+    a: "A BIN checker CC (Bank Identification Number checker) reads the first 6–8 digits of a card number to identify the issuing bank, country of issue, card type (debit/credit/prepaid), and network. Our tool performs this lookup automatically using the public binlist.net API only the BIN prefix is ever transmitted, never the full card number."
   },
   {
     q: "What is 'checker cc live'?",
@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     q: "How accurate is this credit card checker?",
-    a: "Our tool accurately validates the mathematical structure (Luhn check), format logic (CVV length, expiry), and BIN registry presence. It cannot verify actual authorization status, available credit, or whether a card is blocked — those checks require live bank network access."
+    a: "Our tool accurately validates the mathematical structure (Luhn check), format logic (CVV length, expiry), and BIN registry presence. It cannot verify actual authorization status, available credit, or whether a card is blocked those checks require live bank network access."
   },
   {
     q: "Does this tool store my card data?",
@@ -61,7 +61,7 @@ const faqs = [
   },
   {
     q: "What does 'check pre approval credit cards' mean?",
-    a: "Pre-approval checks are a completely different concept. They are soft-pull inquiries run by banks (like Capital One, Chase, or Discover) to see if you qualify for a new credit card offer without affecting your credit score. Our CC checker validates existing card number formats — it has nothing to do with credit applications or pre-qualification. For pre-approval checks, visit your bank's website directly."
+    a: "Pre-approval checks are a completely different concept. They are soft-pull inquiries run by banks (like Capital One, Chase, or Discover) to see if you qualify for a new credit card offer without affecting your credit score. Our CC checker validates existing card number formats it has nothing to do with credit applications or pre-qualification. For pre-approval checks, visit your bank's website directly."
   },
   {
     q: "Is using a CC checker legal?",
@@ -69,7 +69,7 @@ const faqs = [
   },
   {
     q: "What is the difference between this and 'cc checker top' tools?",
-    a: "Many sites advertising 'cc checker top' perform illegal micro-transactions against real payment gateways to test stolen card numbers. Our tool is entirely browser-side and makes zero banking system calls. LIVE status means the card passes mathematical validation only — not that it is authorized or active."
+    a: "Many sites advertising 'cc checker top' perform illegal micro-transactions against real payment gateways to test stolen card numbers. Our tool is entirely browser-side and makes zero banking system calls. LIVE status means the card passes mathematical validation only not that it is authorized or active."
   }
 ];
 
@@ -118,7 +118,7 @@ export default function FAQ() {
         <div className="mt-16 text-center bg-muted/30 border border-border rounded-xl p-8">
           <h3 className="text-2xl font-bold mb-4">Ready to validate?</h3>
           <p className="text-muted-foreground mb-6">
-            Head to our free <strong>cc checker</strong> and start validating your test cards instantly — no signup needed.
+            Head to our free <strong>cc checker</strong> and start validating your test cards instantly no signup needed.
           </p>
           <Link href="/">
             <button className="bg-primary text-primary-foreground font-bold px-8 py-3 rounded-md hover:bg-primary/90 transition-all shadow-[0_0_15px_rgba(0,255,163,0.3)]">

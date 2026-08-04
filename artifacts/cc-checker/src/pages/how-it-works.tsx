@@ -57,13 +57,13 @@ export default function HowItWorks() {
         <article className="prose-custom">
 
           {/* Step 1: Luhn */}
-          <h2 className="mt-0 text-3xl">Step 1 — The Luhn Algorithm (Core Validation)</h2>
+          <h2 className="mt-0 text-3xl">Step 1 The Luhn Algorithm (Core Validation)</h2>
           <p>
             Every card number entered into our <strong>credit card checker</strong> is first run through the <strong>Luhn algorithm</strong> (modulus 10). Invented by IBM scientist Hans Peter Luhn in 1954, this checksum formula is the universal standard used by Visa, Mastercard, Amex, and all major networks to detect accidental digit errors.
           </p>
 
           <div className="bg-card border border-border p-6 rounded-xl my-8 font-mono text-sm">
-            <h3 className="text-foreground font-bold mb-4 font-sans text-lg mt-0">Luhn Algorithm — Step by Step</h3>
+            <h3 className="text-foreground font-bold mb-4 font-sans text-lg mt-0">Luhn Algorithm Step by Step</h3>
             <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
               <li>Starting from the rightmost digit, double every second digit moving left.</li>
               <li>If doubling produces a number &gt; 9 (e.g. 7×2=14), subtract 9 (or add the two digits: 1+4=5).</li>
@@ -73,11 +73,11 @@ export default function HowItWorks() {
           </div>
 
           <p>
-            This is the same check every payment terminal runs before even attempting network authorization. A card that fails Luhn will never reach a bank — which is why this single check is the most reliable way to identify structurally invalid numbers.
+            This is the same check every payment terminal runs before even attempting network authorization. A card that fails Luhn will never reach a bank which is why this single check is the most reliable way to identify structurally invalid numbers.
           </p>
 
           {/* Step 2: CVV */}
-          <h2 className="mt-12 text-3xl">Step 2 — Credit Card Validator with CVV</h2>
+          <h2 className="mt-12 text-3xl">Step 2 Credit Card Validator with CVV</h2>
           <p>
             After the Luhn check, our <strong>credit card validator with CVV</strong> confirms the Card Verification Value is the correct length for the detected network:
           </p>
@@ -86,39 +86,39 @@ export default function HowItWorks() {
             <li><strong>American Express:</strong> CID must be exactly 4 digits.</li>
           </ul>
           <p>
-            A mismatch between the CVV length and the card network is flagged as a detail warning. The card is not automatically marked DIE for CVV mismatch alone — but the confidence score is reduced, and the flag is visible in the result.
+            A mismatch between the CVV length and the card network is flagged as a detail warning. The card is not automatically marked DIE for CVV mismatch alone but the confidence score is reduced, and the flag is visible in the result.
           </p>
           <div className="bg-card border border-border p-5 rounded-xl my-6 text-sm text-muted-foreground">
             <strong className="text-foreground block mb-2">Important:</strong>
-            CVV validation here checks only the <em>format</em> (correct number of digits for the network). We do not — and cannot — verify the cryptographic correctness of a CVV without contacting the issuing bank. No third-party tool can do this without unauthorized gateway access.
+            CVV validation here checks only the <em>format</em> (correct number of digits for the network). We do not and cannot verify the cryptographic correctness of a CVV without contacting the issuing bank. No third-party tool can do this without unauthorized gateway access.
           </div>
 
           {/* Step 3: Expiry */}
-          <h2 className="mt-12 text-3xl">Step 3 — Expiry Date Check</h2>
+          <h2 className="mt-12 text-3xl">Step 3 Expiry Date Check</h2>
           <p>
             The provided month and year are compared against today's date. A card with an expiry date in the past is marked <span className="text-red-400 font-mono font-bold">DIE</span> regardless of its Luhn result. A future expiry contributes positively to the confidence score.
           </p>
 
           {/* Step 4: BIN Lookup */}
-          <h2 className="mt-12 text-3xl">Step 4 — BIN Checker CC (Issuer Lookup)</h2>
+          <h2 className="mt-12 text-3xl">Step 4 BIN Checker CC (Issuer Lookup)</h2>
           <p>
             The first 6–8 digits of any card number form the <strong>Bank Identification Number (BIN)</strong>, also called the Issuer Identification Number (IIN). Our <strong>bin checker CC</strong> feature queries the public <a href="https://binlist.net" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">binlist.net</a> registry to retrieve:
           </p>
           <ul>
-            <li><strong>Issuing bank name</strong> — e.g. "Chase", "Bank of America"</li>
-            <li><strong>Country</strong> — the country of the issuing bank</li>
-            <li><strong>Card type</strong> — debit, credit, or prepaid</li>
-            <li><strong>Network</strong> — confirmed Visa, Mastercard, Amex, etc.</li>
+            <li><strong>Issuing bank name</strong> e.g. "Chase", "Bank of America"</li>
+            <li><strong>Country</strong> the country of the issuing bank</li>
+            <li><strong>Card type</strong> debit, credit, or prepaid</li>
+            <li><strong>Network</strong> confirmed Visa, Mastercard, Amex, etc.</li>
           </ul>
           <p>
             If the BIN does not exist in any real issuer database, the card is immediately downgraded to <span className="text-red-400 font-mono font-bold">DIE</span> with a <code>bin_not_found</code> flag. If BIN lookup is confirmed, the confidence score is boosted by up to +25 points.
           </p>
           <p>
-            BIN lookup results are cached for 24 hours in-browser. No card numbers are ever sent to the BIN API — only the first 6–8 digits (which are publicly non-sensitive).
+            BIN lookup results are cached for 24 hours in-browser. No card numbers are ever sent to the BIN API only the first 6–8 digits (which are publicly non-sensitive).
           </p>
 
           {/* Credit card checker with balance */}
-          <h2 className="mt-12 text-3xl">Credit Card Checker with Balance — What It Means</h2>
+          <h2 className="mt-12 text-3xl">Credit Card Checker with Balance What It Means</h2>
           <p>
             Searches for a "<strong>credit card checker with balance</strong>" are common, but it's important to understand what any tool can and cannot verify:
           </p>
@@ -133,23 +133,23 @@ export default function HowItWorks() {
               <tbody className="divide-y divide-border">
                 <tr className="hover:bg-card/50">
                   <td className="px-5 py-4">Is the card number structurally valid?</td>
-                  <td className="px-5 py-4 text-green-400 font-semibold">✓ Yes — via Luhn algorithm</td>
+                  <td className="px-5 py-4 text-green-400 font-semibold">✓ Yes via Luhn algorithm</td>
                 </tr>
                 <tr className="hover:bg-card/50">
                   <td className="px-5 py-4">Is this BIN from a real issuing bank?</td>
-                  <td className="px-5 py-4 text-green-400 font-semibold">✓ Yes — via BIN lookup</td>
+                  <td className="px-5 py-4 text-green-400 font-semibold">✓ Yes via BIN lookup</td>
                 </tr>
                 <tr className="hover:bg-card/50">
                   <td className="px-5 py-4">Has the card expired?</td>
-                  <td className="px-5 py-4 text-green-400 font-semibold">✓ Yes — via expiry check</td>
+                  <td className="px-5 py-4 text-green-400 font-semibold">✓ Yes via expiry check</td>
                 </tr>
                 <tr className="hover:bg-card/50">
                   <td className="px-5 py-4">Does the card have available credit / balance?</td>
-                  <td className="px-5 py-4 text-red-400 font-semibold">✗ No — requires bank API access</td>
+                  <td className="px-5 py-4 text-red-400 font-semibold">✗ No requires bank API access</td>
                 </tr>
                 <tr className="hover:bg-card/50">
                   <td className="px-5 py-4">Is the card reported stolen or blocked?</td>
-                  <td className="px-5 py-4 text-red-400 font-semibold">✗ No — requires issuer network access</td>
+                  <td className="px-5 py-4 text-red-400 font-semibold">✗ No requires issuer network access</td>
                 </tr>
               </tbody>
             </table>
@@ -189,7 +189,7 @@ export default function HowItWorks() {
 
           <h2 className="mt-12 text-3xl text-red-400">Important Disclaimer</h2>
           <p>
-            This tool is built for <strong>educational purposes, software testing, and security research only</strong>. It validates mathematical structure locally — no card data is transmitted to any server, and no banking system is contacted. Using stolen credit card numbers in any context is a federal crime. All test cards should be generated data or your own cards only.
+            This tool is built for <strong>educational purposes, software testing, and security research only</strong>. It validates mathematical structure locally no card data is transmitted to any server, and no banking system is contacted. Using stolen credit card numbers in any context is a federal crime. All test cards should be generated data or your own cards only.
           </p>
         </article>
 

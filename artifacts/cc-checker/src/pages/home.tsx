@@ -33,7 +33,7 @@ const faqSchema = {
       "name": "Is this CC checker free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, 100% free with no limits. It runs entirely in your browser — no account required."
+        "text": "Yes, 100% free with no limits. It runs entirely in your browser no account required."
       }
     },
     {
@@ -73,7 +73,7 @@ export default function Home() {
             <br />Live Credit Card Validator Online
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Validate credit card numbers with CVV, check BIN issuer, and detect live/dead status instantly using the Luhn algorithm. Bulk <strong className="text-foreground">checker CC live</strong> — no data ever leaves your device.
+            Validate credit card numbers with CVV, check BIN issuer, and detect live/dead status instantly using the Luhn algorithm. Bulk <strong className="text-foreground">checker CC live</strong> no data ever leaves your device.
           </p>
         </div>
 
@@ -95,12 +95,12 @@ export default function Home() {
               <CreditCard className="w-8 h-8 text-primary mb-4" />
               <h2 className="font-bold text-lg mb-2">Credit Card Checker with Balance</h2>
               <p className="text-sm text-muted-foreground">
-                A <strong>credit card checker with balance</strong> potential starts with structural validity. Our tool identifies whether a card can mathematically hold a balance — passing Luhn + valid BIN + unexpired date. We do not query bank systems; that requires your own banking portal.
+                A <strong>credit card checker with balance</strong> potential starts with structural validity. Our tool identifies whether a card can mathematically hold a balance passing Luhn + valid BIN + unexpired date. We do not query bank systems; that requires your own banking portal.
               </p>
             </div>
             <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
               <Globe className="w-8 h-8 text-primary mb-4" />
-              <h2 className="font-bold text-lg mb-2">BIN Checker CC — Identify Issuer</h2>
+              <h2 className="font-bold text-lg mb-2">BIN Checker CC Identify Issuer</h2>
               <p className="text-sm text-muted-foreground">
                 The <strong>BIN checker CC</strong> feature reads the first 6–8 digits (Bank Identification Number) to look up the issuing bank, country, and card type (debit/credit/prepaid) in real time from a public BIN registry.
               </p>
@@ -121,7 +121,7 @@ export default function Home() {
                   A <strong>cc checker</strong> (credit card checker) is an online utility that validates credit card numbers using mathematical rules. Security researchers, payment gateway developers, and e-commerce QA teams use our <strong>live cc checker</strong> to verify whether a card number is structurally valid before using it in test environments.
                 </p>
                 <p>
-                  Our <strong>credit card checker</strong> processes every card through the <strong>Luhn algorithm</strong> (modulus 10) — the standard checksum formula used by Visa, Mastercard, Amex, and all major networks. A card that passes is marked <span className="text-green-400 font-mono font-bold">LIVE</span>; one that fails is marked <span className="text-red-400 font-mono font-bold">DIE</span>.
+                  Our <strong>credit card checker</strong> processes every card through the <strong>Luhn algorithm</strong> (modulus 10) the standard checksum formula used by Visa, Mastercard, Amex, and all major networks. A card that passes is marked <span className="text-green-400 font-mono font-bold">LIVE</span>; one that fails is marked <span className="text-red-400 font-mono font-bold">DIE</span>.
                 </p>
                 <p>
                   Unlike "cc checker top" tools that attempt unauthorized micro-transactions (illegal &amp; unethical), our <strong>checker cc live</strong> is <strong>100% client-side</strong>. No card data ever leaves your browser. No banking network is contacted.
@@ -213,7 +213,7 @@ export default function Home() {
                   Payment gateway developers need to test checkout flows with structurally valid card numbers that will not accidentally process real transactions. Our <strong>bulk cc checker</strong> generates instant Luhn-valid results from any card list, making integration testing faster.
                 </p>
                 <p>
-                  E-commerce QA teams use our <strong>credit card validator with CVV</strong> to confirm their front-end validation logic catches bad formats before an API call is ever made — reducing unnecessary charge attempts and API costs.
+                  E-commerce QA teams use our <strong>credit card validator with CVV</strong> to confirm their front-end validation logic catches bad formats before an API call is ever made reducing unnecessary charge attempts and API costs.
                 </p>
                 <p>
                   Security researchers studying card generation patterns rely on the <strong>BIN checker CC</strong> feature to correlate card ranges with real issuers, verify BIN validity, and identify prepaid vs credit card types from public issuer data.
@@ -222,9 +222,9 @@ export default function Home() {
             </div>
             <div className="space-y-4">
               {[
-                { title: "Zero network requests for card data", desc: "Luhn validation is pure math — no card number ever travels over the wire." },
+                { title: "Zero network requests for card data", desc: "Luhn validation is pure math no card number ever travels over the wire." },
                 { title: "Open Luhn implementation", desc: "Our algorithm is the standard mod-10 checksum, auditable and transparent." },
-                { title: "BIN data from public registry", desc: "BIN lookups use binlist.net, a well-known open BIN database — no proprietary or private data." },
+                { title: "BIN data from public registry", desc: "BIN lookups use binlist.net, a well-known open BIN database no proprietary or private data." },
                 { title: "No registration, no tracking", desc: "No account required. No analytics on card data. No cookies storing your inputs." },
               ].map(item => (
                 <div key={item.title} className="flex gap-4 p-4 bg-card border border-border rounded-xl">
@@ -247,9 +247,9 @@ export default function Home() {
           <p className="text-muted-foreground mb-8">Quick answers about how our <strong>live cc checker</strong> works.</p>
           <div className="space-y-4 text-left">
             {[
-              { q: "Is this CC checker free?", a: "Yes — 100% free, unlimited checks, no account needed. Runs entirely in your browser." },
-              { q: "Does this store my card data?", a: "No. This is pure client-side JavaScript. Your data never leaves your device — no backend receives card numbers." },
-              { q: "Can it check credit card with balance?", a: "Our tool validates mathematical structure (Luhn + BIN + expiry). Actual account balance requires logging into your bank — no third-party tool can check that without your credentials." },
+              { q: "Is this CC checker free?", a: "Yes 100% free, unlimited checks, no account needed. Runs entirely in your browser." },
+              { q: "Does this store my card data?", a: "No. This is pure client-side JavaScript. Your data never leaves your device no backend receives card numbers." },
+              { q: "Can it check credit card with balance?", a: "Our tool validates mathematical structure (Luhn + BIN + expiry). Actual account balance requires logging into your bank no third-party tool can check that without your credentials." },
               { q: "What is 'checker cc live'?", a: "It's a common search term for tools that test whether a card passes Luhn + expiry checks (marking it as 'live' = structurally valid). Our tool does exactly this, entirely in-browser." },
             ].map(({ q, a }) => (
               <div key={q} className="border border-border rounded-lg p-6 bg-card text-left">
