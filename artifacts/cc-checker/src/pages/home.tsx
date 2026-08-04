@@ -68,9 +68,6 @@ export default function Home() {
       {/* Hero / Tool Section */}
       <section className="pt-12 pb-24 px-4 relative overflow-hidden">
         <div className="container mx-auto relative z-10 text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary text-xs font-mono px-3 py-1 rounded-full mb-6">
-            <Zap className="w-3 h-3" /> 100% Browser-Side · No Data Stored
-          </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-foreground">
             Free <span className="text-primary">CC Checker</span>
             <br />Live Credit Card Validator Online
@@ -78,19 +75,6 @@ export default function Home() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Validate credit card numbers with CVV, check BIN issuer, and detect live/dead status instantly using the Luhn algorithm. Bulk <strong className="text-foreground">checker CC live</strong> — no data ever leaves your device.
           </p>
-          {/* Trust badges */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
-            {[
-              { icon: <Lock className="w-3.5 h-3.5" />, label: "No server calls" },
-              { icon: <ShieldCheck className="w-3.5 h-3.5" />, label: "No data stored" },
-              { icon: <Zap className="w-3.5 h-3.5" />, label: "Instant results" },
-              { icon: <Globe className="w-3.5 h-3.5" />, label: "7 networks supported" },
-            ].map(b => (
-              <span key={b.label} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground bg-card border border-border/50 px-3 py-1.5 rounded-full">
-                <span className="text-primary">{b.icon}</span>{b.label}
-              </span>
-            ))}
-          </div>
         </div>
 
         <CheckerTool />
