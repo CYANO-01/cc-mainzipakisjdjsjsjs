@@ -159,17 +159,27 @@ export function CheckerTool() {
 
   const downloadResults = () => {
     if (results.length === 0) return;
+    const live = results.filter(r => r.status === 'LIVE');
+    const die  = results.filter(r => r.status === 'DIE');
+    const unk  = results.filter(r => r.status === 'UNKNOWN');
+    const fmt  = (r: CheckResult) => {
+      const bank = r.detail?.bankName ? ` [${r.detail.bankName}${r.detail.country ? ', ' + r.detail.country : ''}]` : '';
+      const conf = r.confidence !== undefined ? ` (${r.confidence}%)` : '';
+      return `${r.original} | ${r.network}${bank}${conf}`;
+    };
+    const sep = '-'.repeat(60);
     const lines = [
-      `CC Checker Results — ${new Date().toISOString()}`,
+      `CC Checker Results - ${new Date().toISOString()}`,
       `LIVE: ${liveCount}  DIE: ${dieCount}  UNKNOWN: ${unknownCount}`,
-      '─'.repeat(60),
-      ...results.map(r => {
-        const bank = r.detail?.bankName ? ` [${r.detail.bankName}${r.detail.country ? ', ' + r.detail.country : ''}]` : '';
-        const conf = r.confidence !== undefined ? ` (${r.confidence}% confidence)` : '';
-        return `[${r.status}] ${r.original} — ${r.network}${bank}${conf}`;
-      }),
+      sep,
+      `--- LIVE (${live.length}) ---`,
+      ...live.map(fmt),
+      sep,
+      `--- DIE (${die.length}) ---`,
+      ...die.map(fmt),
+      ...(unk.length ? [sep, `--- UNKNOWN (${unk.length}) ---`, ...unk.map(fmt)] : []),
     ];
-    const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+    const blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/plain;charset=utf-8' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
     a.href     = url;
@@ -318,49 +328,72 @@ export function CheckerTool() {
             <StatCard value={unknownCount} label="UNKNOWN" colorClass="unknown" />
           </div>
 
-          {/* Results terminal */}
-          <div className="rounded-xl border border-border bg-card overflow-hidden flex flex-col flex-1 min-h-[420px]">
-            <div className="px-4 py-3 border-b border-border bg-muted/30 flex justify-between items-center">
-              <span className="font-mono text-sm font-semibold text-muted-foreground flex items-center gap-2">
-                TERMINAL_OUTPUT
-                {isRunning && (
-                  <span className="inline-flex gap-0.5">
-                    <span className="w-1 h-1 rounded-full bg-primary animate-bounce [animation-delay:0ms]" />
-                    <span className="w-1 h-1 rounded-full bg-primary animate-bounce [animation-delay:150ms]" />
-                    <span className="w-1 h-1 rounded-full bg-primary animate-bounce [animation-delay:300ms]" />
-                  </span>
+          {/* Export bar */}
+          <div className="flex justify-between items-center px-1">
+            <span className="font-mono text-xs text-muted-foreground flex items-center gap-2">
+              {isRunning && (
+                <span className="inline-flex gap-0.5">
+                  <span className="w-1 h-1 rounded-full bg-primary animate-bounce [animation-delay:0ms]" />
+                  <span className="w-1 h-1 rounded-full bg-primary animate-bounce [animation-delay:150ms]" />
+                  <span className="w-1 h-1 rounded-full bg-primary animate-bounce [animation-delay:300ms]" />
+                </span>
+              )}
+              {isRunning ? 'CHECKING...' : results.length > 0 ? `${totalChecked} checked` : ''}
+            </span>
+            <div className="flex gap-2">
+              <Button variant="ghost" size="sm" onClick={copyLive}
+                className="h-7 text-xs font-mono px-2 hover:bg-live/10 hover:text-live border border-transparent hover:border-live/20">
+                <Copy className="w-3 h-3 mr-1" /> COPY LIVE
+              </Button>
+              <Button variant="ghost" size="sm" onClick={downloadResults}
+                className="h-7 text-xs font-mono px-2 hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20">
+                <Download className="w-3 h-3 mr-1" /> EXPORT
+              </Button>
+            </div>
+          </div>
+
+          {/* Split panels */}
+          <div className="grid grid-cols-2 gap-4 flex-1">
+            {/* LIVE panel */}
+            <div className="rounded-xl border border-live/20 bg-live/5 overflow-hidden flex flex-col min-h-[380px]">
+              <div className="px-4 py-2.5 border-b border-live/20 bg-live/10 flex items-center justify-between">
+                <span className="font-mono text-xs font-bold text-live">LIVE</span>
+                <span className="font-mono text-xs text-live/70">{liveCount}</span>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                {results.filter(r => r.status === 'LIVE').length === 0 ? (
+                  <div className="h-full flex items-center justify-center text-live/20 font-mono text-xs p-4 text-center">
+                    {results.length === 0 ? 'AWAITING INPUT...' : 'NONE'}
+                  </div>
+                ) : (
+                  <div className="divide-y divide-live/10">
+                    {results.filter(r => r.status === 'LIVE').map((res, i) => (
+                      <ResultRow key={res.timestamp + i} result={res} compact />
+                    ))}
+                  </div>
                 )}
-              </span>
-              <div className="flex gap-2">
-                <Button variant="ghost" size="sm" onClick={copyLive}
-                  className="h-7 text-xs font-mono px-2 hover:bg-live/10 hover:text-live border border-transparent hover:border-live/20">
-                  <Copy className="w-3 h-3 mr-1" /> COPY LIVE
-                </Button>
-                <Button variant="ghost" size="sm" onClick={downloadResults}
-                  className="h-7 text-xs font-mono px-2 hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20">
-                  <Download className="w-3 h-3 mr-1" /> EXPORT
-                </Button>
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto">
-              {results.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-muted-foreground/30 font-mono space-y-4 p-8">
-                  <div className="w-16 h-16 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                    <Check className="w-8 h-8" />
+            {/* DIE panel */}
+            <div className="rounded-xl border border-die/20 bg-die/5 overflow-hidden flex flex-col min-h-[380px]">
+              <div className="px-4 py-2.5 border-b border-die/20 bg-die/10 flex items-center justify-between">
+                <span className="font-mono text-xs font-bold text-die">DIE</span>
+                <span className="font-mono text-xs text-die/70">{dieCount + unknownCount}</span>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                {results.filter(r => r.status !== 'LIVE').length === 0 ? (
+                  <div className="h-full flex items-center justify-center text-die/20 font-mono text-xs p-4 text-center">
+                    {results.length === 0 ? 'AWAITING INPUT...' : 'NONE'}
                   </div>
-                  <p>AWAITING DATA INPUT...</p>
-                  {binLookup && (
-                    <p className="text-xs opacity-60">BIN lookup enabled — results are highly accurate</p>
-                  )}
-                </div>
-              ) : (
-                <div className="divide-y divide-border/50">
-                  {results.map((res, i) => (
-                    <ResultRow key={res.timestamp + i} result={res} />
-                  ))}
-                </div>
-              )}
+                ) : (
+                  <div className="divide-y divide-die/10">
+                    {results.filter(r => r.status !== 'LIVE').map((res, i) => (
+                      <ResultRow key={res.timestamp + i} result={res} compact />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -381,7 +414,7 @@ function StatCard({ value, label, colorClass }: { value: number; label: string; 
   );
 }
 
-function ResultRow({ result: res }: { result: CheckResult }) {
+function ResultRow({ result: res, compact }: { result: CheckResult; compact?: boolean }) {
   const bank    = res.detail?.bankName;
   const country = res.detail?.country;
   const conf    = res.confidence;
@@ -389,15 +422,8 @@ function ResultRow({ result: res }: { result: CheckResult }) {
   return (
     <div
       data-testid={`result-row-${res.timestamp}`}
-      className="px-4 py-2.5 flex items-start gap-3 text-sm font-mono hover:bg-accent/20 transition-colors animate-in fade-in slide-in-from-top-1"
+      className="px-3 py-2 flex items-start gap-2 text-xs font-mono hover:bg-accent/20 transition-colors animate-in fade-in slide-in-from-top-1"
     >
-      {/* Status badge */}
-      <div className="w-16 flex-shrink-0 pt-0.5">
-        {res.status === 'LIVE'    && <span className="bg-live/10 text-live border border-live/20 px-2 py-0.5 rounded text-xs font-bold glow-live">LIVE</span>}
-        {res.status === 'DIE'     && <span className="bg-die/10 text-die border border-die/20 px-2 py-0.5 rounded text-xs font-bold">DIE</span>}
-        {res.status === 'UNKNOWN' && <span className="bg-unknown/10 text-unknown border border-unknown/20 px-2 py-0.5 rounded text-xs font-bold">UNKN</span>}
-      </div>
-
       {/* Card info */}
       <div className="flex-1 min-w-0 space-y-0.5">
         <div className={`truncate ${res.status === 'DIE' ? 'text-muted-foreground/60' : 'text-foreground'}`}>
@@ -418,13 +444,13 @@ function ResultRow({ result: res }: { result: CheckResult }) {
           </div>
         )}
 
-        {/* Failure reason summary */}
+        {/* Failure reasons (compact: only show in DIE panel) */}
         {res.status === 'DIE' && res.detail && (
           <div className="text-xs text-die/50 flex flex-wrap gap-1">
-            {!res.detail.luhn        && <span>luhn_fail</span>}
-            {!res.detail.expiryValid && <span>expired</span>}
-            {!res.detail.lengthValid && <span>bad_length</span>}
-            {res.detail.isTestCard   && <span>test_card</span>}
+            {!res.detail.luhn         && <span>luhn_fail</span>}
+            {!res.detail.expiryValid  && <span>expired</span>}
+            {!res.detail.lengthValid  && <span>bad_length</span>}
+            {res.detail.isTestCard    && <span>test_card</span>}
             {!res.detail.patternClean && <span>fake_pattern</span>}
             {res.detail.binExists === false && <span>bin_not_found</span>}
           </div>
