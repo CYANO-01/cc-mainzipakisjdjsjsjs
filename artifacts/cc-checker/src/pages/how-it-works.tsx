@@ -7,7 +7,7 @@ const howToSchema = {
   "name": "How to Use a CC Checker to Validate Credit Cards",
   "description": "Step-by-step guide to validating credit card numbers, CVV, and BIN with our free credit card checker.",
   "totalTime": "PT1M",
-  "tool": [{ "@type": "HowToTool", "name": "CC Checker (ccvalidator.pro)" }],
+  "tool": [{ "@type": "HowToTool", "name": "CC Checker (cc-checker.live)" }],
   "step": [
     {
       "@type": "HowToStep",
@@ -42,7 +42,7 @@ export default function HowItWorks() {
       <SEOHead
         title="How CC Checker Works – Credit Card Validator with CVV & BIN Checker Guide"
         description="Learn how our credit card checker validates CVV, checks BIN issuer, and uses the Luhn algorithm to determine live/dead status. Full technical guide for developers."
-        canonicalUrl="https://ccvalidator.pro/how-it-works"
+        canonicalUrl="https://cc-checker.live/how-it-works"
         jsonLd={howToSchema}
       />
 

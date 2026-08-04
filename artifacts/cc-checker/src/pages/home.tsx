@@ -7,7 +7,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "CC Checker – Free Live Credit Card Checker",
-  "url": "https://ccvalidator.pro/",
+  "url": "https://cc-checker.live/",
   "description": "Free online credit card checker and CVV validator. Uses the Luhn algorithm to validate CC numbers, BIN/IIN issuer lookup, and expiry date check. 100% client-side.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web Browser",
@@ -61,7 +61,7 @@ export default function Home() {
       <SEOHead
         title="CC Checker – Free Live Credit Card Checker & CVV Validator Online"
         description="Free CC checker to validate credit card numbers with CVV, check BIN issuer & live/dead status via Luhn algorithm. Bulk checker for Visa, Mastercard, Amex. 100% browser-side – no data stored."
-        canonicalUrl="https://ccvalidator.pro/"
+        canonicalUrl="https://cc-checker.live/"
         jsonLd={[webAppSchema, faqSchema]}
       />
 

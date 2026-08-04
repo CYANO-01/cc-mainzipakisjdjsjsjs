@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ccvalidator.pro/sitemap.xml
+Sitemap: https://cc-checker.live/sitemap.xml

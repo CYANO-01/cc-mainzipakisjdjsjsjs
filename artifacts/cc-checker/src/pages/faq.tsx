@@ -89,7 +89,7 @@ export default function FAQ() {
       <SEOHead
         title="CC Checker FAQ – Credit Card Validator, CVV Checker & BIN Lookup Questions"
         description="Answers to all common questions about our free CC checker, credit card validator with CVV, BIN checker CC, credit card checker with balance, checker cc live, and more."
-        canonicalUrl="https://ccvalidator.pro/faq"
+        canonicalUrl="https://cc-checker.live/faq"
         jsonLd={faqSchema}
       />
 

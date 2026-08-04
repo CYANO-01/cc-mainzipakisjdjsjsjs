@@ -8,7 +8,7 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({ title, description, canonicalUrl, jsonLd }: SEOHeadProps) {
-  const url = canonicalUrl || 'https://ccvalidator.pro/';
+  const url = canonicalUrl || 'https://cc-checker.live/';
 
   return (
     <Helmet>
@@ -20,7 +20,7 @@ export function SEOHead({ title, description, canonicalUrl, jsonLd }: SEOHeadPro
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="https://ccvalidator.pro/og-image.png" />
+      <meta property="og:image" content="https://cc-checker.live/og-image.png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="CC Checker" />
@@ -28,7 +28,7 @@ export function SEOHead({ title, description, canonicalUrl, jsonLd }: SEOHeadPro
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content="https://ccvalidator.pro/og-image.png" />
+      <meta name="twitter:image" content="https://cc-checker.live/og-image.png" />
 
       {jsonLd && (
         <script type="application/ld+json">
