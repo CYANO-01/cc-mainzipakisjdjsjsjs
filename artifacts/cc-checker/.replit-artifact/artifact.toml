@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "CC Checker - Free Live Credit Card Checker"
+description = "A free online CC checker tool that validates credit card numbers using the Luhn algorithm and identifies card type. Supports bulk checking of multiple cards at once. Targets SEO keywords: cc checker, live cc checker, cc checker top, credit card checker."
+version = "1.0.0"
+id = "artifacts/cc-checker"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22870
+
+[services.development]
+run = "pnpm --filter @workspace/cc-checker run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cc-checker", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/cc-checker/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22870"
+BASE_PATH = "/"
