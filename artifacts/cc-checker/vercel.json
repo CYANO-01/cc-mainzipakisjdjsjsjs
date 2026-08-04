@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pnpm install --frozen-lockfile && BASE_PATH=/ pnpm --filter @workspace/cc-checker run build",
+  "outputDirectory": "artifacts/cc-checker/dist/public",
+  "installCommand": "npm install -g pnpm",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
