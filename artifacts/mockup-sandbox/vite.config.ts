@@ -1,5 +1,6 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import type { UserConfig } from "vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -8,7 +9,7 @@ import { mockupPreviewPlugin } from "./mockupPreviewPlugin";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig(async () => {
+export default defineConfig(async (_env): Promise<UserConfig> => {
   // Provide safe defaults for CI/Vercel so the config can be bundled without PORT/BASE_PATH
   const rawPort = process.env.PORT;
   const port = rawPort ? Number(rawPort) : 5173;
