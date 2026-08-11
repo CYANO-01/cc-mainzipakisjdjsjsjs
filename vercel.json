@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "outputDirectory": "artifacts/cc-checker/dist/public",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "artifacts/cc-checker/dist/public" }
+    }
+  ]
+}
